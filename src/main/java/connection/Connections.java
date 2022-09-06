@@ -44,7 +44,7 @@ public class Connections {
                 product.setId((Long)productData.get("id"));
                 product.setName((String)productData.get("name"));
                 product.setDescription((String)productData.get("description"));
-                product.setId((Long)productData.get("price"));
+                product.setPrice((Long)productData.get("price"));
                 product.setImage((String)productData.get("image"));
                 productList.add(product);
             });
