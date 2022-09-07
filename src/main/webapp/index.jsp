@@ -1,5 +1,5 @@
 <%@page import="model.Product"%>
-<%@page import="connection.Connections"%>
+<%@page import="Endpoint.Connections"%>
 <%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
@@ -33,12 +33,15 @@
                     <h4>Description</h4>
                     <h6><%=p.getDescription()%></h6>
                     <h4>Quantity</h4>
+                    <form action="add-to-cart" method="get">
                     <div class="form-group d-flex justify-content-between">
-                    <input type="text" name="quantity" class="form-control"  value="1"> 
+                    <input type="text" name="quantity" class="form-control"  value="1">
+                    <input type="text" name="productId" class="form-control" hidden="true" value="<%=p.getId()%>"> 
                     </div>
                     <div class="mt-3 d-flex justify-content-between">
-                    <a class="btn btn-dark" href="add-to-cart?productId=<%=p.getId()%>?quantity=">Add to Cart</a>
+                        <button class="btn btn-dark" type="submit">Submit</button>
                     </div>
+                    </form>
                 </div>
             </div>
             <%

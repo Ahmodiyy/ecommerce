@@ -1,26 +1,12 @@
-<%@page import="connection.DbCon"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Endpoint.Connections"%>
 <%@page import="dao.ProductDao"%>
 <%@page import="model.*"%>
-<%@page import="java.util.*"%>
-<%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 <%
-    DecimalFormat dcf = new DecimalFormat("#.##");
-    request.setAttribute("dcf", dcf);
-    User auth = (User) request.getSession().getAttribute("auth");
-    if (auth != null) {
-        request.setAttribute("person", auth);
-    }
+    Connections connection = new Connections();
     ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
-    List<Cart> cartProduct = null;
-    if (cart_list != null) {
-        ProductDao pDao = new ProductDao(DbCon.getConnection());
-        cartProduct = pDao.getCartProducts(cart_list);
-        double total = pDao.getTotalCartPrice(cart_list);
-        request.setAttribute("total", total);
-        request.setAttribute("cart_list", cart_list);
-    }
 %>
 <!DOCTYPE html>
 <html>
@@ -43,43 +29,38 @@
 
         <div class="container my-3">
             <div class="d-flex py-3"><h3>Total Price: $ ${(total>0)?dcf.format(total):0} </h3> <a class="mx-3 btn btn-primary" href="cart-check-out">Check Out</a></div>
-            <table class="table table-light">
-                <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Buy Now</th>
-                        <th scope="col">Cancel</th>
-                    </tr>
-                </thead>
-                <tbody>
+            
                     <%     if (cart_list != null) {
-                            for (Cart c : cartProduct) {
+                            for (Cart c : cart_list) {
+                            Product p = connection.getProduct(String.valueOf(c.getId()));
                     %>
-                    <tr>
-                        <td><%=c.getName()%></td>
-                        <td><%=c.getCategory()%></td>
-                        <td><%= dcf.format(c.getPrice())%></td>
-                        <td>
-                            <form action="order-now" method="post" class="form-inline">
-                                <input type="hidden" name="id" value="<%= c.getId()%>" class="form-input">
-                                <div class="form-group d-flex justify-content-between">
-                                    <a class="btn bnt-sm btn-incre" href="quantity-inc-dec?action=inc&id=<%=c.getId()%>"><i class="fas fa-plus-square"></i></a> 
-                                    <input type="text" name="quantity" class="form-control"  value="<%=c.getQuantity()%>" readonly> 
-                                    <a class="btn btn-sm btn-decre" href="quantity-inc-dec?action=dec&id=<%=c.getId()%>"><i class="fas fa-minus-square"></i></a>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-sm">Buy</button>
-                            </form>
-                        </td>
-                        <td><a href="remove-from-cart?id=<%=c.getId()%>" class="btn btn-sm btn-danger">Remove</a></td>
-                    </tr>
+                    <div class="row">
+                <div class="col-md-6 my-6">
+                    <div class="card w-100">
+                        <img class="card-img-top" src="image/<%=p.getImage()%>"
+                             alt="Card image cap">
+                    </div>
+                </div>
+               <div class="col-md-6 my-6" >
+                    <h2 class="name"><%=p.getName()%></h2>
+                    <h5 class="price">$<%=p.getPrice()%></h5>
+                    <h4>Description</h4>
+                    <h6><%=p.getDescription()%></h6>
+                    <div class="mt-3 d-flex justify-content-between">
+                        <button class="btn btn-dark" type="submit">Submit</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+                    
+          
+                        <a href="remove-from-cart?id=<%=c.getId()%>" class="btn btn-sm btn-danger">Remove</a>
+                    
 
                     <%
                             }
                         }%>
-                </tbody>
-            </table>
+                
         </div>
 
         <%@include file="/includes/footer.jsp"%>

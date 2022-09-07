@@ -2,6 +2,6 @@ model\Cart.class
 model\Product.class
 servlet\RemoveFromCartServlet.class
 servlet\AddToCartServlet.class
-connection\Connections.class
 model\Orders.class
+Endpoint\Connections.class
 model\User.class
