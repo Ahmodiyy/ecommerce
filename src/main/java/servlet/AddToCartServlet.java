@@ -25,7 +25,8 @@ public class AddToCartServlet extends HttpServlet {
 //        	out.print("add to cart servlet");
 
             ArrayList<Cart> cartList = new ArrayList<>();
-            int id = Integer.parseInt(request.getParameter("id"));
+            int id = Integer.parseInt(request.getParameter("productId"));
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
             Cart cm = new Cart();
             cm.setId(id);
             cm.setQuantity(1);
@@ -45,7 +46,7 @@ public class AddToCartServlet extends HttpServlet {
                 }
                 if (!exist) {
                     cart_list.add(cm);
-                    response.sendRedirect("index.jsp");
+                    response.sendRedirect("cart.jsp");
                 }
             }
         }

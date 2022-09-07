@@ -1,0 +1,7 @@
+model\Cart.class
+model\Product.class
+servlet\RemoveFromCartServlet.class
+servlet\AddToCartServlet.class
+connection\Connections.class
+model\Orders.class
+model\User.class
