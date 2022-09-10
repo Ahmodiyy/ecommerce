@@ -23,24 +23,50 @@
         <%@include file="/includes/navbar.jsp"%>
 
         <div class="container">
-            <div class="card w-50 mx-auto my-5">
-                <div class="card-header text-center">User Login</div>
-                <div class="card-body">
-                    <form action="user-login" method="post">
-                        <div class="form-group">
-                            <label>Email address</label> 
-                            <input type="email" name="login-email" class="form-control" placeholder="Enter email">
+       
+                
+                <div class="row">
+                    
+                    <div class="col-md-6">
+                        <h2>Login</h2>
+                        <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                        <form class="row g-3">
+                        <div class="col-md-6">
+                          <label for="inputEmail4" class="form-label">Email</label>
+                          <input type="email" class="form-control" id="inputEmail4">
                         </div>
-                        <div class="form-group">
-                            <label>Password</label> 
-                            <input type="password" name="login-password" class="form-control" placeholder="Password">
+                        <div class="col-md-6">
+                          <label for="inputPassword4" class="form-label">Password</label>
+                          <input type="password" class="form-control" id="inputPassword4">
                         </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Login</button>
+                 
+                        <div class="col-12">
+                           <button type="submit" class="btn btn-primary">Sign in</button>
+                         </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <h2>Register</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <form class="row g-3">
+                        <div class="col-md-6">
+                          <label for="inputEmail4" class="form-label">Email</label>
+                          <input type="email" class="form-control" id="inputEmail4">
                         </div>
-                    </form>
+                        <div class="col-md-6">
+                          <label for="inputPassword4" class="form-label">Password</label>
+                          <input type="password" class="form-control" id="inputPassword4">
+                        </div>
+                 
+                        <div class="col-12">
+                           <button type="submit" class="btn btn-primary">Sign up</button>
+                         </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            
         </div>
 
         <%@include file="/includes/footer.jsp"%>

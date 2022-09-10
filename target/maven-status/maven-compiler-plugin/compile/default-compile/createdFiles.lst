@@ -1,7 +1,11 @@
+servlet\LogoutServlet.class
 model\Cart.class
 model\Product.class
 servlet\RemoveFromCartServlet.class
 servlet\AddToCartServlet.class
+servlet\Register.class
 model\Orders.class
 Endpoint\Connections.class
 model\User.class
+servlet\CheckOutServlet.class
+servlet\LoginServlet.class

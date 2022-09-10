@@ -10,11 +10,10 @@ package model;
  */
 
 public class Orders {
-    private int id;
+    private long id;
     private User user;
     private Product product;
     private int quantity;
-    private String date;
 
     public User getUser() {
         return user;
@@ -34,13 +33,6 @@ public class Orders {
         this.quantity = quantity;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
 
     public Product getProduct() {
         return product;
@@ -50,12 +42,20 @@ public class Orders {
         this.product = product;
     }
 
-    public int getId() {
+    /**
+     * @return the id
+     */
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    /**
+     * @param id the id to set
+     */
+    public void setId(long id) {
         this.id = id;
     }
+
+  
 }
 

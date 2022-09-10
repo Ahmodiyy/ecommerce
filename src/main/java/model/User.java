@@ -11,7 +11,7 @@ package model;
 
 public class User {
 
-    private int id;
+    private long id;
     private String name;
     private String email;
     private String password;
@@ -41,12 +41,19 @@ public class User {
         this.password = password;
     }
 
-    public int getId() {
+    /**
+     * @return the id
+     */
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    /**
+     * @param id the id to set
+     */
+    public void setId(long id) {
         this.id = id;
     }
+
 }
 

@@ -39,7 +39,7 @@
                     <input type="text" name="productId" class="form-control" hidden="true" value="<%=p.getId()%>"> 
                     </div>
                     <div class="mt-3 d-flex justify-content-between">
-                        <button class="btn btn-dark" type="submit">Submit</button>
+                        <button class="btn btn-dark" type="submit">Add to cart</button>
                     </div>
                     </form>
                 </div>

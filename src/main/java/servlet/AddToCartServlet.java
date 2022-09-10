@@ -4,7 +4,6 @@ import model.Cart;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +19,6 @@ public class AddToCartServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-
         try (PrintWriter out = response.getWriter()) {
 //        	out.print("add to cart servlet");
 
@@ -35,6 +33,8 @@ public class AddToCartServlet extends HttpServlet {
             if (cart_list == null) {
                 cartList.add(cart);
                 session.setAttribute("cart-list", cartList);
+              
+
                 response.sendRedirect("cart.jsp");
             } else {
                 boolean exist = false;
@@ -46,6 +46,7 @@ public class AddToCartServlet extends HttpServlet {
                 }
                 if (!exist) {
                     cart_list.add(cart);
+                    
                     response.sendRedirect("cart.jsp");
                 }
             }

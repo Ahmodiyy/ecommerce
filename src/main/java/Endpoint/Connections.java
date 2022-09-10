@@ -7,6 +7,8 @@ package Endpoint;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -26,6 +28,31 @@ import org.json.simple.JSONValue;
  */
 public class Connections {
     
+    public long register(String email, String password) throws IOException{
+       URL jsonPage = new URL("http://localhost:8080/api/register");
+       HttpURLConnection urlConnection = (HttpURLConnection)jsonPage.openConnection();
+       urlConnection.setRequestMethod("POST");
+       urlConnection.setRequestProperty("Content-Type", "application/json");
+       urlConnection.setRequestProperty("Accept", "application/json");
+       urlConnection.setDoOutput(true);
+       JSONObject jsonObject = new JSONObject();
+       jsonObject.put("email", email);
+       jsonObject.put("password", password);
+       try(OutputStream os = urlConnection.getOutputStream()){
+        byte[] input = jsonObject.toString().getBytes("utf-8");
+        os.write(input, 0, input.length);			
+       }
+       
+       try(BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"))) {
+         StringBuilder response = new StringBuilder();
+         String responseLine = null;
+         while ((responseLine = br.readLine()) != null) {
+             response.append(responseLine.trim());
+         }
+         System.out.println(response.toString());
+         return Long.parseLong(response.toString());  
+     }
+    }
     public Product getProduct(String productId) throws IOException{
         Object json = JSONValue.parse(getJson("http://localhost:8080/api/product/" + productId));
         JSONObject productData  = (JSONObject)json;
@@ -38,10 +65,12 @@ public class Connections {
         product.setImage((String)productData.get("image"));
         return product;
     }
+    
     private String getJson(String endPointUrl) throws MalformedURLException, IOException{
         String recieve;
        String buffer = "";
        URL jsonpage = new URL(endPointUrl);
+       
        URLConnection urlcon = jsonpage.openConnection();
         try (BufferedReader buffread = new BufferedReader(new InputStreamReader(urlcon.getInputStream()))) {
             while ((recieve = buffread.readLine()) != null)
@@ -70,7 +99,7 @@ public class Connections {
     public static void main(String[] args) {
         Connections connections = new Connections();
         try {
-            connections.getProduct("5");
+            connections.register("email","password");
         } catch (IOException ex) {
             Logger.getLogger(Connections.class.getName()).log(Level.SEVERE, null, ex);
         }
